@@ -1,0 +1,11 @@
+@model TheWall.Models.Comment
+
+<div class="row">
+    <div class="row">
+        <div class="one column"></div>
+        <div class="eleven columns">
+            <h5>@Model.Commenter.FirstName @Model.Commenter.LastName - @Model.CreatedAt.ToString("MMM dd, yyyy")</h5>
+            <p>@Model.CommentContent</p>
+        </div>
+    </div>
+</div>

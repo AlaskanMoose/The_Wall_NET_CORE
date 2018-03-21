@@ -1,0 +1,33 @@
+@using TheWall.Models
+@model TheWall.Models.Message
+
+<div>
+    <div class="row">
+        <div class="eight columns">
+            <h2>CodingDojo Wall</h2>
+        </div>
+        <div class="three columns">
+            <h4>Welcome @ViewBag.CurrentUser.FirstName</h4>
+        </div>
+        <div class="one column">
+            <a href="/logout">log off</a>
+        </div>
+    </div>
+    <div class="row">
+        <div asp-validation-summary="All"></div>
+    </div>
+    <div class="row">
+        <form asp-action="CreateMessage" asp-controller="Messages" method="POST">
+            <h5>Post a message</h5>
+            <textarea asp-for="MessageContent" cols="80" rows="3"></textarea>
+            <button type="submit">Post a message</button>
+        </form>
+    </div>
+    @foreach(var message in @ViewBag.Messages)
+    {
+        <div>
+            @Html.Partial("_MessagePartial", (Message)message)
+            <hr/>
+        </div>
+    }
+</div>

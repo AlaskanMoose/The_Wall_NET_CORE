@@ -1,0 +1,27 @@
+@using TheWall.Models
+@model TheWall.Models.Message
+
+<div class="row">
+    <div class="row">
+        <div class="one column"></div>
+        <div class="eleven columns">
+            <h4>@Model.Poster.FirstName @Model.Poster.LastName - @Model.CreatedAt.ToString("MMMM dd, yyyy")</h4>
+            <p>@Model.MessageContent</p>
+            @if(@Model.user_id == @ViewBag.CurrentUser.UserId && @Model.Deletable)
+            {
+                <form asp-action="DeleteMessage" asp-controller="Messages" asp-route-messageid="@Model.MessageId" method="POST">
+                    <button type="submit">Delete your post?</button>
+                </form>
+            }
+            @foreach(var comment in @Model.Comments)
+            {
+                @Html.Partial("_CommentPartial", (Comment)comment);
+            }
+            <form asp-action="CreateComment" asp-controller="Comments" asp-route-messageid="@Model.MessageId" method="POST">
+                <h5>Post a comment</h5>
+                <textarea name="CommentContent" cols="80" rows="3"></textarea>
+                <button type="submit">Post a comment</button>
+            </form>
+        </div>
+    </div>
+</div>
